@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0"> -->
+        
+        <title> 
+           Food chart 
+        </title>
+        <link rel="icon" type="image/png" href="https://spoonthumbs.com/wp-content/uploads/2017/05/cropped-spoonthumbs_favicon_color.png" />
+        <script src="task0.js"></script>
+        <link rel="stylesheet" href="task0.css">
+    </head>
+    <body>
+        <div class="center">
+                <h1>FOOD MANAGER</h1>
+        </div>
+        <br><br>
+        
+        <div id="inputdata">
+            <form  id="inputinitials">
+                <pre>
+Enter your age   (in years):  <input type="number" required  min="0" max="100" value="0" placeholder="age" step="1.00" id="num1"><br>
+Enter your height  (in mts):  <input type="number" required  min="0" max="300" value="0" placeholder="height" step="0.01" id="num2"> <br>
+Enter your weight  (in kgs):  <input type="number" required  min="0" max="500" value="0" placeholder="weight" step="0.01" id="num3">
+                </pre>
+
+                <div class="displayflex">
+                <p>Your gender:</p>
+                <pre>         
+                </pre> <br> <br><div>
+                  <input type="radio" id="male" name="gender" value="male" checked>
+                  <label for="male">Male</label>
+                </div>
+
+                <div>
+                  <input type="radio" id="female" name="gender" value="female">  
+                  <label for="female">Female</label>
+                </div>
+                </div>
+                <div class="cen">
+
+                    <input type="submit" value="Submit details" id="userdetails" onclick="calculateTE(); return false">
+                    <!-- <button id="userdetails" onclick="calculateTE();return false">Submit details</button> -->
+                    </div>
+                <br>                              
+                
+            </form>
+            <h4 id="te"></h4> 
+        
+
+        </div>
+        <br>
+        <br>
+        <table id="t1">
+            <tr>
+                <th> </th>
+                <th>FOOD item</th>
+                <th>Carbhohydrates</th>
+                <th>Fats</th>
+                <th>Protiens</th>
+            </tr>
+            <tr>
+                <td>Enter details about your food taken:</td>
+                <td>Name of food</td>
+                <td>in calories</td>
+                <td>in calories</td>
+                <td>in calories</td>
+            </tr>
+            <form>
+            <tr>
+                <td> </td>
+                <td><input type="text" maxlength="30" id="fooditem" data-required="true"></td>
+                <td><input type="number" required="True" min="0" max="10000"  placeholder="Carbhohydrates" step="1" id="carb"></td>
+                <td><input type="number" required="True" min="0" max="10000"  placeholder="Fats" step="1" id="fats"></td>
+                <td><input type="number" required="True" min="0" max="10000"  placeholder="Protiens" step="1" id="prot"></td>
+            </tr>
+           
+
+        </table>
+
+        <br>
+        <div class="cen">
+
+
+            <input type="button" id="submitdiff" onclick="alertSubmit()" value="Submit Food item" >
+                <!-- <button id="submitdiff" onclick="alertSubmit()">Submit Food item</button> -->
+            </div>
+            <br>
+            <!-- <button id="submitdiff" onclick="alertSubmit()">ubmit Food item</button> -->
+            
+
+             </form>
+            <button id="totalcalories" onclick="show()">Get total calories taken today</button>
+            
+
+    </body>
+</html>

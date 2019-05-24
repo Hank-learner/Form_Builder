@@ -1,0 +1,96 @@
+body{
+    color: aliceblue;
+    size: 16px;
+    margin: 20px;
+    padding: 10px;
+    background: #00293c;
+    font-family: sans-serif;
+    
+}
+.center{
+    text-shadow: 3px 2px rgb(30, 43, 30);
+    color: lime;
+text-align: center;
+margin: auto;
+width: 40%;
+border: 3px solid #73AD21;
+padding: 5px;
+}
+#inputdata{
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    display: grid;
+    height: 300px;
+    width: 500px;
+    background-color: rgba(93, 49, 255, 0.281);
+    border-radius: 25px;
+    align-content: center;
+    justify-content: center;
+
+}
+.displayflex{
+   display:flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  table{
+          margin-left: auto;
+          margin-right: auto;
+      
+  }
+   table,
+   th,
+   td {
+       color: black;
+       border: 1px solid black;
+
+       border-collapse: collapse;
+   }
+
+   th {
+       text-align: center;
+       padding: 15px;
+       width: 100px;
+       background-color: rgb(63, 63, 63);
+       color: white;
+       text-align: left;
+   }
+
+   td {
+       color: black;
+       width: 100px;
+       padding: 15px;
+       text-align: left
+   }
+
+   table#t1 tr:nth-child(even) {
+       background-color: #eee;
+   }
+
+   table#t1 tr:nth-child(odd) {
+       background-color: #fff;
+   }
+
+   button#totalcalories {
+       margin: auto;
+       display: block;
+
+   }
+   .cen{
+                 margin-left: auto;
+                 margin-right: auto;
+                 text-align: center;
+
+   }
