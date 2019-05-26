@@ -1,37 +1,134 @@
-body{
+body {
     color: aliceblue;
     size: 16px;
     margin: 20px;
     padding: 10px;
     background: #00293c;
     font-family: sans-serif;
-    
+
 }
-.center{
+
+.center {
     text-shadow: 3px 2px rgb(30, 43, 30);
     color: lime;
-text-align: center;
-margin: auto;
-width: 40%;
-border: 3px solid #73AD21;
-padding: 5px;
+    text-align: center;
+    margin: auto;
+    width: 40%;
+    border: 3px solid #73AD21;
+    padding: 5px;
 }
-#inputdata{
+
+input[type=number] {
+    width: 140px;
+    border-radius: 5px;
+    padding: 3px 12px;
+    border: 3px solid #2f3966;
+    -moz-outline-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+
+}
+
+input[type=text] {
+    width: 140px;
+    border-radius: 5px;
+    padding: 3px 12px;
+    border: 3px solid #2f3966;
+    -moz-outline-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+
+}
+
+#inputdata {
     overflow: auto;
     margin-left: auto;
     margin-right: auto;
     padding: 30px;
     display: grid;
-    height: 300px;
+    height: 400px;
     width: 500px;
-    background-color: rgba(93, 49, 255, 0.281);
+    background-color: rgb(33, 39, 33);
     border-radius: 25px;
     align-content: center;
     justify-content: center;
 
 }
-.displayflex{
-   display:flex;
+
+.displayflex {
+    display: flex;
+}
+
+#reqinp {
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    background-color: rgb(33, 39, 33);
+    color: #00aeff;
+    border-radius: 15px;
+    justify-content: center;
+    align-content: center;
+    display: grid;
+    height: 75px;
+    width: 700px;
+    text-align: center;
+
+}
+
+button {
+    background-color: #0084ff;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    cursor: pointer;
+    padding: 3px 12px;
+    border: 3px solid #1833ab;
+
+}
+
+button:hover {
+    background-color: #9da0df80;
+}
+
+input[type=button] {
+    background-color: #0084ff;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+    font-family: Georgia,
+        'Times New Roman',
+        Times,
+        serif;
+    cursor: pointer;
+    padding: 3px 12px;
+    border: 3px solid #1833ab;
+
+
+}
+
+#submitdiff:hover {
+    background-color: #9da0df80;
+}
+
+input[type=submit] {
+    background-color: #0084ff;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+    font-family: Georgia,
+        'Times New Roman',
+        Times,
+        serif;
+    cursor: pointer;
+    padding: 3px 12px;
+    border: 3px solid #1833ab;
+
+}
+
+input[type=submit]:hover {
+    background-color: #9da0df80;
 }
 
 
@@ -45,52 +142,66 @@ padding: 5px;
 
 
 
-  table{
-          margin-left: auto;
-          margin-right: auto;
-      
-  }
-   table,
-   th,
-   td {
-       color: black;
-       border: 1px solid black;
+#requirement {
+    color: #fff;
+}
 
-       border-collapse: collapse;
-   }
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50px;
 
-   th {
-       text-align: center;
-       padding: 15px;
-       width: 100px;
-       background-color: rgb(63, 63, 63);
-       color: white;
-       text-align: left;
-   }
+}
 
-   td {
-       color: black;
-       width: 100px;
-       padding: 15px;
-       text-align: left
-   }
+table,
+th,
+td {
+    color: black;
+    border: 1px solid black;
+    
 
-   table#t1 tr:nth-child(even) {
-       background-color: #eee;
-   }
+    border-collapse: collapse;
+}
 
-   table#t1 tr:nth-child(odd) {
-       background-color: #fff;
-   }
+th {
+    text-align: center;
+    padding: 15px;
+    width: 100px;
+    background-color: rgb(63, 63, 63);
+    color: white;
+    text-align: left;
+}
 
-   button#totalcalories {
-       margin: auto;
-       display: block;
+td {
+    color: black;
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+}
 
-   }
-   .cen{
-                 margin-left: auto;
-                 margin-right: auto;
-                 text-align: center;
+tr:nth-child(even) {
+    background-color: #eee;
+}
 
-   }
+tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+button#totalcalories {
+    margin: auto;
+    display: block;
+
+}
+
+
+.cen {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
+
+table#disptab th {
+    text-align: center;
+
+}
