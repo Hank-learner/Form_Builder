@@ -3,6 +3,7 @@ body {
     size: 16px;
     margin: 20px;
     padding: 10px;
+
     background: #00293c;
     font-family: sans-serif;
 
@@ -40,7 +41,29 @@ input[type=text] {
 
 }
 
+#fisr {
+    display: flex;
+}
+
+#img1 {
+    width: 300px;
+    height: 300px;
+    margin-left: 100px;
+    margin-top: 50px;
+    border-radius: 10px;
+}
+
+#img2 {
+    width: 300px;
+    height: 300px;
+    margin-right: 100px;
+     margin-top: 50px;
+     border-radius: 10px;
+
+}
+
 #inputdata {
+
     overflow: auto;
     margin-left: auto;
     margin-right: auto;
@@ -108,7 +131,7 @@ input[type=button] {
 
 }
 
-#submitdiff:hover {
+input[type=button]:hover {
     background-color: #9da0df80;
 }
 
@@ -146,24 +169,28 @@ input[type=submit]:hover {
     color: #fff;
 }
 
+#distab {
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 table {
     margin-left: auto;
     margin-right: auto;
-    border-radius: 50px;
 
-}
-
-table,
-th,
-td {
-    color: black;
-    border: 1px solid black;
-    
+    /* border: 1px solid black; */
+    border-radius: 6px;
+    border-spacing: 1;
 
     border-collapse: collapse;
+
 }
 
 th {
+    border: 1px solid black;
+    border-collapse: collapse;
     text-align: center;
     padding: 15px;
     width: 100px;
@@ -173,6 +200,8 @@ th {
 }
 
 td {
+    border: 1px solid black;
+    border-collapse: collapse;
     color: black;
     width: 200px;
     padding: 15px;
@@ -201,7 +230,42 @@ button#totalcalories {
 
 }
 
+
 table#disptab th {
     text-align: center;
 
+}
+
+#resss {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    align-content: center;
+    background-color: darkslategrey;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+
+}
+
+#resst {
+    background-color: tomato;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+    font-family: Georgia,
+        'Times New Roman',
+        Times,
+        serif;
+    cursor: crosshair;
+    width: 100px;
+
+    padding: 3px 12px;
+    border: 3px solid #f00000;
+
+
+}
+
+#resst:hover {
+    background-color: #dfd39d80;
 }

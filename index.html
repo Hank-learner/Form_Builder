@@ -18,18 +18,21 @@
     <div class="center">
         <h1>FOOD MANAGER</h1>
     </div>
+    <br>
+    <hr>
     <br><br>
+    
+
+<div id="fisr">
+    <img src="johnny-bravo.jpg" id="img1">
 
     <div id="inputdata">
-        <form id="inputinitials">
-            <h3>Calculate scientific daily energy requirement</h3>
+        <form id="inputinitials" onsubmit="return false">
+            <h3 class="cen">Calculate scientific daily energy requirement</h3>
             <pre>
-Enter your age  (in years)*:  <input type="number" required="true" min="0" max="100"  placeholder="age"
-    step="1.00" id="num1"><br>
-Enter your height (in mts)*:  <input type="number" required="true" min="0" max="300"  placeholder="height"
-    step="0.01" id="num2"> <br>
-Enter your weight (in kgs)*:  <input type="number" required="true" min="0" max="500"  placeholder="weight"
-    step="0.10" id="num3">
+Enter your age  (in years)*:  <input type="number" required="true" min="0" max="100"  placeholder="age"    step="1.00" id="num1"><br>
+Enter your height (in mts)*:  <input type="number" required="true" min="0" max="300"  placeholder="height"    step="0.01" id="num2"> <br>
+Enter your weight (in kgs)*:  <input type="number" required="true" min="0" max="500"  placeholder="weight"    step="0.10" id="num3">
                 </pre>
 
             <div class="displayflex">
@@ -55,9 +58,11 @@ Enter your weight (in kgs)*:  <input type="number" required="true" min="0" max="
             <br>
 
         </form>
-        <h4 id="te"></h4>
+        <h4 class="cen" id="te"></h4>
 
     </div>
+    <img src="animatedgif.gif" id="img2">
+</div>
     <br><br><br>
 
     <div id="reqinp">
@@ -67,7 +72,7 @@ Enter your weight (in kgs)*:  <input type="number" required="true" min="0" max="
 
     </div>
 
-
+    <br>
     <br>
     <br>
 
@@ -87,9 +92,11 @@ Enter your weight (in kgs)*:  <input type="number" required="true" min="0" max="
             <td>in calories</td>
             <td>in calories</td>
         </tr>
-        <form>
+        <form onsubmit="return false">
             <tr>
-                <td><pre>Fill here -> </pre></td>
+                <td>
+                    <pre>Fill here -> </pre>
+                </td>
                 <td><input type="text" required maxlength="30" id="fooditem"></td>
                 <td><input type="number" required="true" min="0" max="10000" placeholder="Carbhohydrates" step="1"
                         id="carb"></td>
@@ -97,6 +104,7 @@ Enter your weight (in kgs)*:  <input type="number" required="true" min="0" max="
                 <td><input type="number" required="true" min="0" max="10000" placeholder="Protiens" step="1" id="prot">
                 </td>
             </tr>
+        </form>
     </table>
 
     <br>
@@ -107,31 +115,42 @@ Enter your weight (in kgs)*:  <input type="number" required="true" min="0" max="
     <br>
     <br>
 
-    </form>
-    <table id="disptab">
-        <thead>
-            <tr>
-                <th>FOOD item<br>name</th>
-                <th>Carbhohydrates<br>calories</th>
-                <th>Fats<br>calories</th>
-                <th>Protiens<br>calories</th>
-                <th>Total calories</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div id="distab">
+        <table id="disptab">
+            <thead>
+                <tr>
+                    <th>FOOD item<br>name</th>
+                    <th>Carbhohydrates<br>calories</th>
+                    <th>Fats<br>calories</th>
+                    <th>Protiens<br>calories</th>
+                    <th>Total calories</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        </tbody>
+            </tbody>
 
-    </table>
-    <br>
-    <br>
+        </table>
+        <br>
+        <button id="retab" onclick="reetab()">Reset table</button>
+    </div>
 
     <div class="cen">
         <div id="lef"></div><br>
         <button id="totalcalories" onclick="show()">Get total calories taken today</button><br>
         <div id="rea"></div><br>
-        <button id="chkreq" onclick="sho()" title="enter requirement in the above feild and try"  disabled>Check Energy Requirement status</button>
-    </div>
+        <button id="chkreq" onclick="sho()" title="enter requirement in the above feild and try">Check Energy
+            Requirement status</button>
+    </div><br>
+    <br>
+    <hr>
+    <footer>
+        <div id="resss">
+            <br>
+            <button id="resst" onclick="rstpg()">Reset all details</button>
+            <br>
+        </div>
+    </footer>
     <script src="task0.js"></script>
 </body>
 
