@@ -1,214 +1,104 @@
-class Game {
-    constructor(bufferwidth, bufferheight) {
-        this.bufferwidth = bufferwidth;
-        this.bufferheight = bufferheight;
-
-        this.backgroundimg = new Backgroundimg(this);
-        this.shooter = new Shooter(this);
-        this.bullet = new Bullet(this.shooter, this);
-        new InputHandler(this.shooter, this, this.bullet);
-        // this.inputhandler = new InputHandler(this.shooter, this, this.bullet);
-
-    }
-    draw(buffer) {
-        this.backgroundimg.draw(buffer);
-        this.shooter.draw(buffer);
-
-        // document.addEventListener("keydown", event => {
-        //     switch (event.keyCode) {
-        //         case 40:
-        // if (event.keyCode == 40)
-        this.bullet.draw(buffer);
-        // console.log(1);
-        //             break;
-        //         default:
-        //             break;
-        //     }
-        // });
-
-    }
-    update(deltatime) {
-        this.shooter.update(deltatime);
-        // this.inputhandler.update(deltatime);
-        this.bullet.update(deltatime);
-    }
-}
-
-class Backgroundimg {
-    constructor(game) {
-        this.game = game;
-    }
-    draw(buffer) {
-        context.imageSmoothingEnabled = false;
-        for (let i = map.length - 1; i > -1; --i) {
-            let value = map[i];
-            let tilex = (i % columns) * tilesize;
-            let tiley = Math.floor(i / columns) * tilesize;
-            buffer.drawImage(tilesheet, value * tilesize, 0, tilesize, tilesize, tilex, tiley, tilesize, tilesize);
-
-        }
-    }
-}
-
 class Shooter {
-    constructor(game) {
-        this.game = game;
-        this.position = {
-            x: 113,
-            y: 181
-        };
-        this.speed = 0;
-        this.maxSpeed = 2;
-        this.size = 30;
-        this.shooterimg = document.getElementById("shooterimg");
+    constructor() {
     }
-    draw(buffer) {
+    draw() {
+        if (moveleft) shooterspeed = -shootermaxSpeed;
+        else shooterspeed = 0;
+        if (moveright) shooterspeed = shootermaxSpeed;
 
-        buffer.drawImage(this.shooterimg, this.position.x, this.position.y, this.size, this.size);
+        shooterposition.x += shooterspeed;
+        if (shooterposition.x < 0) shooterposition.x = 0;
+        if (shooterposition.x + shootersize > canvas.width) shooterposition.x = canvas.width - shootersize;
         context.imageSmoothingEnabled = false;
-    }
-    moveleft() {
-        this.speed = -this.maxSpeed;
+        context.drawImage(shooterimg, shooterposition.x, shooterposition.y, shootersize, shootersize);
 
     }
-    moveright() {
-        this.speed = this.maxSpeed;
-    }
-    stop() {
-        this.speed = 0;
-    }
-    update(deltatime) {
-
-        this.position.x += this.speed;
-
-        if (this.position.x < 0)
-            this.position.x = 0;
-
-
-        if (this.position.x + this.size > this.game.bufferwidth)
-            this.position.x = this.game.bufferwidth - this.size;
-
-    }
-
 }
 
+function background() {
+    context.imageSmoothingEnabled = false;
+    for (let i = map.length - 1; i > -1; --i) {
+        let value = map[i];
+        let tilex = (i % tilesize) * columns;
+        let tiley = Math.floor(i / tilesize) * rows;
+        context.drawImage(tilesheet, value * tilesize, 0, tilesize - 1, tilesize - 1, tilex, tiley, columns + 1, rows + 1);
+
+    }
+}
 class Bullet {
-    constructor(shooter, game) {
-        this.shooter = shooter;
-        this.game = game;
-        this.position = {
-            x: this.shooter.position.x + 15,
-            y: this.shooter.position.y - 2
+    constructor() {
+        this.x = shooterposition.x + shootersize / 2;
+        this.y = shooterposition.y;
+        this.vy = bulletspeed;
 
-        };
-        this.speed = -1;
-
-
+        bullets.push(this);
     }
-    draw(buffer) {
-        buffer.beginPath();
-        buffer.arc(this.position.x, this.position.y, 4, 0, 2 * Math.PI);
-        buffer.fillStyle = 'yellow';
-        buffer.fill();
-        context.imageSmoothingEnabled = false;
 
-    }
-    update(deltatime) {
-        this.position.y += this.speed;
-
-        if (this.position.y < 0) {
-            this.position.x = this.shooter.position.x + 15;
-            this.position.y = this.shooter.position.y - 2;
+    movebullet() {
+        context.beginPath();
+        context.fillStyle = "#6b6b6b";
+        context.arc(this.x, this.y, bulletradius, 0, Math.PI * 2, false);
+        context.closePath();
+        context.fill();
+        this.y += -this.vy;
+        if (this.y < 0) {
+            bullets.splice(bullets.indexOf(this), 1);
         }
+
+    }
+
+}
+
+class Rock {
+    constructor() {
+        this.radius = 25;
+
+
+        this.y = this.radius + height / 8;
+        if ((Math.random()) < 0.5)
+            this.x = canvas.width - this.radius;
+        else
+            this.x = this.radius;
+        this.vx = Math.random();
+        this.vy = 0;
+        rocks.push(this);
+
+    }
+    moverock() {
+        context.beginPath();
+        context.fillStyle = 'yellow';
+        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        context.closePath();
+        context.fill();
+        // if (this.x < this.radius || this.x > canvas.width - this.radius) {
+        //     this.vx = -this.vx;
+        // }
+        // this.x += this.vx;
+        // if (this.y <= canvas.height / 8) {
+        //     this.vy = 9.8;
+        // }
+        // else if (this.y >= 7 * canvas.height / 8 - this.radius) {
+        //     this.vy = -9.8;
+        // }
+        this.vy = 9.8;
+        this.y = this.vy;
     }
 }
 
 
 
 
-
-
-class InputHandler {
-    constructor(shooter, game, bullet) {
-        this.shooter = shooter;
-        this.game = game;
-        this.bullet = bullet;
-        document.addEventListener("keydown", event => {
-            switch (event.keyCode) {
-                case 65:
-                case 37:
-                    shooter.moveleft();
-                    break;
-                case 68:
-                case 39:
-                    shooter.moveright();
-                    break;
-                case 83:
-                case 40:
-                    // this.bullet = new Bullet(this.shooter, this.game);
-                    // this.bullet.draw(buffer);
-
-
-                    //     // bullets.push(new Bullet(this.shooter, this.game));
-                    //     // this.bullet.draw(buffer);
-                    //     // for (let ind = 0; ind < bullets.length; ind++) {
-                    //     // let bullet = bullets[ind];
-                    //     // this.bullet.draw(buffer);
-                    //     // if (bullet.y < -4) bullets.splice(ind);
-                    //     // }
-                    //     // this.bullet.update(deltatime);
-
-                    break;
-                default:
-                    break;
-            }
-
-
-        });
-        document.addEventListener("keyup", event => {
-            switch (event.keyCode) {
-                case 65:
-                case 37:
-                    if (shooter.speed < 0) {
-                        shooter.stop();
-                    }
-                    break;
-                case 68:
-                case 39:
-                    if (shooter.speed > 0) {
-                        shooter.stop();
-                    }
-                    break;
-                // case 83:
-                // case 40:
-                //     bullet.shootstop();
-                //     break;
-                default:
-                    break;
-
-
-            }
-        });
-    }
-    // update(deltatime) {
-    //     this.bullet.update(deltatime);
-
-    // }
-}
+var canvas = document.querySelector("canvas");
+var context = canvas.getContext("2d");
+var tilesheet = new Image();
+tilesheet.src = "shoot.png";
 
 
 
 
+shooterimg = document.getElementById("shooterimg");
+var tilesize = 16;
 
-
-
-var context = document.querySelector("canvas").getContext("2d");
-var buffer = document.createElement("canvas").getContext("2d");
-
-var bullets = new Array();
-
-
-var columns = 16; var rows = 16; var tilesize = 16; var scale = 1;
 var map = [1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1,
     0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0,
     0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1,
@@ -222,45 +112,125 @@ var map = [1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1,
     1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0,
     0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0,
     0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1,
+    1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0,
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
     3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 
-buffer.canvas.width = tilesize * columns;
-buffer.canvas.height = tilesize * rows;
+var height = document.documentElement.clientHeight - 16;
+var width = document.documentElement.clientWidth - 16;
+var minsize = height < width ? height : width;
+canvas.height = minsize;
+canvas.width = minsize;
+var columns = minsize / 16;
+var rows = minsize / 16;
 
-let game = new Game(buffer.canvas.width, buffer.canvas.height);
+var shootersize = minsize / 10;
+var shooterposition = {
+    x: columns * 7.3,
+    y: rows * 12.6
+};
+var shooterspeed = 0;
+var shootermaxSpeed = 4;
 
-let lasttime = 0;
-var tilesheet = new Image();
-tilesheet.src = "shoot.png";
+var moveleft = false;
+var moveright = false;
+
+let shooter = new Shooter();
+var shootinginterval = 200;
+
+var bullets = [];
+var bulletradius = 5;
+var bulletspeed = 5;
+var bulletinterval = 10;
+
+var rocks = [];
+var rockinterval = 2000;
+document.addEventListener("keydown", event => {
+    switch (event.keyCode) {
+        case 37:
+        case 65:
+            moveleft = true;
+            break;
+        case 39:
+        case 68:
+            moveright = true;
+            break;
+        default: break;
+    }
+});
+document.addEventListener("keyup", event => {
+    switch (event.keyCode) {
+        case 37:
+        case 65:
+            moveleft = false;
+            break;
+        case 39:
+        case 68:
+            moveright = false;
+            break;
+        default: break;
+    }
+});
+
+
+var shoot = setInterval(function () {
+    bullet = new Bullet();
+}, shootinginterval);
+var rock = setInterval(function () {
+    rock = new Rock();
+}, rockinterval);
+var drawinterval = setInterval(function () {
+    background();
+    for (i = 0; i < rocks.length; i++) {
+        rocks[i].moverock();
+    }
+
+    for (i = 0; i < bullets.length; i++) {
+        bullets[i].movebullet();
+    }
+}, bulletinterval);
 
 
 
 
-function gameLoop(timestamp) {
-    var height = document.documentElement.clientHeight - 16;
-    var width = document.documentElement.clientWidth - 16;
-    var minsize = height < width ? height : width;
-    context.canvas.height = minsize;
-    context.canvas.width = minsize;
-    let deltatime = timestamp - lasttime;
-    lasttime = timestamp;
 
 
-    // for (let ind = bullets.length - 1; ind > -1; --ind) {
-    //     let bullet = bullets[ind];
-    //     console.log(1);
-    //     if (bullet.y < -4) bullets.splice(ind);
+
+
+function gameloop() {
+    window.requestAnimationFrame(gameloop);
+
+
+
+
+    // if (height == document.documentElement.clientHeight - 16 && width == document.documentElement.clientWidth - 16) { }
+    // else {
+    //     var testx = shooterposition.x / columns * 7.6;
+    //     height = document.documentElement.clientHeight - 16;
+    //     width = document.documentElement.clientWidth - 16;
+    //     minsize = height < width ? height : width;
+    //     canvas.height = minsize;
+    //     canvas.width = minsize;
+    //     columns = minsize / 16;
+    //     rows = minsize / 16;
+    //     shootersize = minsize / 10;
+    //     shooterposition = {
+    //         x: columns * 7.3,
+    //         y: rows * 12.6
+    //     };
     // }
-    game.draw(buffer);
-    game.update(deltatime);
 
-    context.drawImage(buffer.canvas, 0, 0, buffer.canvas.width, buffer.canvas.height, 0, 0, context.canvas.width, context.canvas.height);
 
-    window.requestAnimationFrame(gameLoop);
-    context.imageSmoothingEnabled = false;
-} window.requestAnimationFrame(gameLoop);
+
+    // background();
+
+
+
+    shooter.draw();
+
+
+}
+window.requestAnimationFrame(gameloop);
 
 
 
