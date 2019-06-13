@@ -6,8 +6,8 @@ class Shooter {
     }
     draw() {
         if (moveleft) shooterspeed = -shootermaxSpeed;
+        else if (moveright) shooterspeed = shootermaxSpeed;
         else shooterspeed = 0;
-        if (moveright) shooterspeed = shootermaxSpeed;
 
         shooterposition.x += shooterspeed;
         if (shooterposition.x < 0) shooterposition.x = 0;
@@ -69,21 +69,17 @@ class Bullet {
 }
 
 class Rock {
-    constructor() {
-        this.radius = Math.random() * 50;
-        if (this.radius < 25)
-            this.radius = 25;
-        this.y = this.radius + height / 8;
-        if ((Math.random()) < 0.5)
-            this.x = canvas.width - this.radius;
-        else
-            this.x = this.radius;
-        this.vx = Math.random();
-        this.vy = 0;
-        this.gravity = 0.05;
-        this.gravitySpeed = 0;
+    constructor(radius, startx, starty, strength, vx, vy) {
+        this.radius = radius;
+        this.x = startx;
+        this.y = starty;
+        this.beginy = this.y;
+        this.vx = vx;
+        this.vy = vy;
+        this.gravity = 0.05 * scale;
         this.bounce = 1;
-        this.strength = Math.pow(2, Math.floor(Math.random() * 5));
+        this.strength = strength;
+        this.power = this.strength;
         rocks.push(this);
 
     }
@@ -96,7 +92,8 @@ class Rock {
             context.fill();
 
             context.fillStyle = "black";
-            context.font = "20px Arial";
+            var fontsize = 20 * scale;
+            context.font = fontsize + "px Arial";
             context.textAlign = "center";
             context.fillText(this.strength, this.x, this.y);
 
@@ -106,13 +103,38 @@ class Rock {
             }
             if (this.y >= ((7 * canvas.height / 8) - this.radius)) {
                 this.y = ((7 * canvas.height / 8) - this.radius);
-                this.gravitySpeed = -(this.gravitySpeed * this.bounce);
+                this.vy = -(this.vy * this.bounce);
             }
-            this.gravitySpeed += this.gravity;
+            this.vy += this.gravity;
             this.x += this.vx;
-            this.y += this.gravitySpeed;
+            this.y += this.vy;
         }
         else {
+            if (this.radius > 30 * scale) {
+                var rradius = this.radius / 1.5;
+                if (rradius < 20 * scale)
+                    rradius = 20 * scale;
+                var ry = this.y;
+                var rx1 = this.x - rradius;
+                var rx2 = this.x + rradius;
+                var rvx = this.vx;
+                var rvy = this.vy;
+
+                if (rvx < 0)
+                    rvx = -rvx;
+                if (rvx < 0.5)
+                    rvx = 0.5
+
+                var rstrength = this.power / 2;
+                if (rstrength > 0.9) {
+                    if (rx1 < rradius) rx1 = rradius;
+                    if (rx2 > canvas.width - rradius) rx2 = canvas.width - rradius;
+                    rocke = new Rock(rradius, rx1, ry, rstrength, -rvx, rvy);
+                    rocke = new Rock(rradius, rx2, ry, rstrength, +rvx, rvy);
+                }
+
+
+            }
             rocks.splice(rocks.indexOf(this), 1);
         }
     }
@@ -150,8 +172,9 @@ function bulletrockcollision() {
 
 function gameover() {
     for (let i = 0; i < rocks.length; i++) {
-        if (shooterposition.x < rocks[i].rockx && shooterposition.x + shootersize > rocks[i].rockx &&
-            shooterposition.y < rocks[i].rocky + rocks[i].rockradius) {
+        if ((shooterposition.x < rocks[i].rockx && shooterposition.x + (3 / 8 * shootersize) > rocks[i].rockx && shooterposition.y + (13 / 33 * shootersize) < rocks[i].rocky + rocks[i].rockradius) ||
+            (shooterposition.x + (shootersize * 3 / 8) < rocks[i].rockx && shooterposition.x + (5 / 8 * shootersize) > rocks[i].rockx && shooterposition.y < rocks[i].rocky + rocks[i].rockradius) ||
+            (shooterposition.x + (shootersize * 5 / 8) < rocks[i].rockx && shooterposition.x + shootersize > rocks[i].rockx && shooterposition.y + (13 / 33 * shootersize) < rocks[i].rocky + rocks[i].rockradius)) {
 
             if (localStorage.getItem("Highscore")) {
                 var highscore = parseFloat(localStorage.getItem("Highscore"));
@@ -174,9 +197,17 @@ function gameover() {
             rocks = [];
             bullets = [];
             shooterposition = {
-                x: columns * 7.3,
-                y: rows * 12.6
+                x: (columns * 8.3) - shootersize,
+                y: (rows * 14.2) - shootersize
             };
+            moveleft = false;
+            moveright = false;
+            rockinterval = 3000;
+            rockintervalspeed = 20;
+            rockintervalspeed1 = 0;
+            timeperbullet = 100;
+            timeperbulletspeed = 0;
+
             clearInterval(shoot);
             clearInterval(drawinterval);
             clearInterval(rock);
@@ -187,9 +218,12 @@ function gameover() {
             context.fillStyle = "rgba(0,0,0,0.1)";
             context.fill();
             context.fillStyle = "white";
-            context.font = "40px Verdana";
-            context.fillText("press space to start ", canvas.width / 2, canvas.height / 2);
-
+            var fontsize = 30 * scale;
+            context.font = fontsize + "px Verdana";
+            context.fillText("Press SPACE to start", (canvas.width / 2), (canvas.height / 2) - (30 * scale));
+            var fontsize = 15 * scale;
+            context.font = fontsize + "px Verdana";
+            context.fillText("Press SPACE to Pause during game ", (canvas.width / 2), (canvas.height / 2));
 
         }
     }
@@ -197,15 +231,18 @@ function gameover() {
 
 function gamescore() {
     context.fillStyle = "black";
-    context.font = "20px Verdana";
-    context.fillText("Score : " + score, 120, 40);
+    var fontsize = 20 * scale;
+    context.font = fontsize + "px Verdana";
+    context.fillText("Score : " + score, 120 * scale, 40 * scale);
     if (Highscore < score)
         Highscore = score;
-    context.fillText("Highscore : " + Highscore, 120, 70);
-    context.font = "30px Verdana";
+    context.fillText("Highscore : " + Highscore, 120 * scale, 70 * scale);
 
+    var fontsize = 30 * scale;
+    context.font = fontsize + "px Verdana";
     context.fillStyle = "Purple";
-    context.fillText("Ball Blast", 620, 60);
+    context.fillText("Ball Blast", 620 * scale, 60 * scale);
+
 }
 
 
@@ -245,21 +282,27 @@ canvas.height = minsize;
 canvas.width = minsize;
 var columns = minsize / 16;
 var rows = minsize / 16;
+var scale = minsize / 756;
 
 context.rect(0, 0, canvas.width, canvas.height);
 context.fillStyle = "rgba(0,0,0,0.1)";
 context.fill();
+context.textAlign = "center";
 context.fillStyle = "white";
-context.font = "40px Verdana";
-context.fillText("press space to start ", canvas.width / 4, canvas.height / 2);
+var fontsize = 30 * scale;
+context.font = fontsize + "px Verdana";
+context.fillText("Press SPACE to start ", (canvas.width / 2), (canvas.height / 2) - (50 * scale));
+var fontsize = 15 * scale;
+context.font = fontsize + "px Verdana";
+context.fillText("Press SPACE to Pause during game ", (canvas.width / 2), (canvas.height / 2));
 
 var shootersize = minsize / 10;
 var shooterposition = {
-    x: columns * 7.3,
-    y: rows * 12.6
+    x: (columns * 8.3) - shootersize,
+    y: (rows * 14.2) - shootersize
 };
 var timepershooter = 20;
-var shootermaxSpeed = 4;
+var shootermaxSpeed = 5 * scale;
 
 var moveleft = false;
 var moveright = false;
@@ -268,12 +311,15 @@ let shooter = new Shooter();
 var shooterspeed = 0;
 
 var bullets = [];
-var bulletradius = 5;
-var bulletspeed = 10;
+var bulletradius = 5 * scale;
+var bulletspeed = 10 * scale;
 var setinterval = 10;
 var timeperbullet = 100;
+var timeperbulletspeed = 0;
 var rocks = [];
-var rockinterval = 2000;
+var rockinterval = 3000;
+var rockintervalspeed = 0;
+var rockintervalspeed1 = 20;
 
 var score = 0;
 var Highscore = 0;
@@ -301,8 +347,10 @@ document.addEventListener("keydown", event => {
                 context.fillStyle = "rgba(0,0,0,0.1)";
                 context.fill();
                 context.fillStyle = "white";
-                context.font = "40px Verdana";
-                context.fillText("press space to resume ", canvas.width / 5, canvas.height / 2);
+                var fontsize = 30 * scale;
+                context.font = fontsize + "px Verdana";
+                context.fillText("Press SPACE to resume ", (canvas.width / 2), (canvas.height / 2) - (30 * scale));
+
             }
             else if (gamestate == false) {
                 gamestate = true;
@@ -326,22 +374,46 @@ document.addEventListener("keyup", event => {
     }
 });
 
-var shoot, drawinterval, rock, shooterdraw;
+var shoot, drawinterval, rock, shooterdraw, rocke;
 
 function gameloop() {
     if (gamestate == true) {
         shoot = setInterval(function () {
-            if (gamestate == true)
+            if (gamestate == true) {
                 bullet = new Bullet();
-            else
-                return;
+                timeperbulletspeed++;
+                if (timeperbulletspeed >= 300) {
+                    timeperbullet -= 2;
+                    timeperbulletspeed = 0;
+                }
+            }
         }, timeperbullet);
+
         rock = setInterval(function () {
-            if (gamestate == true)
-                rocke = new Rock();
-            else
-                return;
+            if (gamestate == true) {
+                var rradius = Math.random() * 50 * scale;
+                if (rradius < 25 * scale)
+                    rradius = 25 * scale;
+                var ry = rradius + canvas.height / 8;
+                if ((Math.random()) < 0.5)
+                    var rx = canvas.width - rradius;
+                else
+                    rx = rradius;
+
+                var rvx = Math.random() * scale;
+                var rvy = 0;
+                var rstrength = Math.pow(2, Math.floor(Math.random() * rockintervalspeed1 / 5));
+                rocke = new Rock(rradius, rx, ry, rstrength, rvx, rvy);
+                rockintervalspeed++;
+                rockintervalspeed1++;
+                if (rockinterval <= 1000) rockinterval = 1000;
+                else if (rockintervalspeed >= 10) {
+                    rockinterval -= 100;
+                    rockintervalspeed = 0;
+                }
+            }
         }, rockinterval);
+
         drawinterval = setInterval(function () {
             if (gamestate == true) {
                 background();
@@ -353,59 +425,11 @@ function gameloop() {
                     bullets[i].movebullet();
                 }
 
-
                 bulletrockcollision();
                 gamescore();
                 gameover();
             }
-            else
-                return;
         }, setinterval);
-
-
-        shooterdraw = setInterval(function () {
-            if (gamestate == true)
-                shooter.draw();
-            else
-                return;
-        }, timepershooter);
     }
-    else
-        return;
 
 }
-
-
-
-
-// function sizeloop() {
-//     window.requestAnimationFrame(sizeloop);
-
-
-
-
-//     if (height == document.documentElement.clientHeight - 16 && width == document.documentElement.clientWidth - 16) { }
-//     else {
-//         var testx = shooterposition.x / columns * 7.6;
-//         height = document.documentElement.clientHeight - 16;
-//         width = document.documentElement.clientWidth - 16;
-//         minsize = height < width ? height : width;
-//         canvas.height = minsize;
-//         canvas.width = minsize;
-//         columns = minsize / 16;
-//         rows = minsize / 16;
-//         shootersize = minsize / 10;
-//         shooterposition = {
-//             x: columns * 7.3,
-//             y: rows * 12.6
-//         };
-//     }
-
-
-
-
-
-
-
-// }
-// window.requestAnimationFrame(sizeloop);
