@@ -1,0 +1,64 @@
+xmlhttp.onreadystatechange = function () {
+if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+var response = xmlhttp.responseText;
+if (response == 'doneformcreation') {
+resetfields();
+alert("form created sucessfully\n URL: http://localhost/formbuilder.com/forms/" + username + "_" + newformname + ".php");
+} else {
+finishformdisplay.innerHTML = response;
+}
+}
+};
+xmlhttp.open('POST', 'dashboardphp.php');
+xmlhttp.send(formData);
+
+
+
+
+
+
+
+function rearrangeradiobuttons() {
+for (let i = 1; i <= radiogroupno; i++) { var radiogroupdiv=document.getElementById('divradiogroup' + i); var x=0; if
+    (!radiogroupdiv && i==radiogroupno) { radiogroupno--; radiogroups.splice(i); continue; } else if (!radiogroupdiv) { var
+    k=i + 1; x=1; while (!(document.getElementById('divradiogroup' + k))) { x++; k++; if ((i + x)> numberfieldno) {
+    break;
+    }
+    }
+    for (let j = k; j <= radiogroupno; j++) { var divelement=document.getElementById('divradiogroup' + j); if (divelement) {
+        divelement.id='divradiogroup' + (j - x); var paragraphelement=document.getElementById('headingradiogroup' + j);
+        paragraphelement.id='headingradiogroup' + (j - x); for (let a=1; a <=radiogroups[j]; a++) { var
+        radiobuttonelement=document.getElementById('radiogroup' + j + "btnno" + a); if (!radiobuttonelement &&
+        a==radiogroups[j]) { radiogroups[j]--; } else if (!radiobuttonelement) { var p=a + 1; var y=1; while
+        (!(document.getElementById('radiogroup' + j + 'btnno' + p))) { y++; p++; if ((a + y)> radiogroups[j]) {
+        break;
+        }
+        }
+        for (let n = p; n <= radiogroups[j]; n++) { var buttonelement=document.getElementById('radiogroup' + j + 'btnno' +
+            n); if (buttonelement) { buttonelement.id='radiogroup' + (j - x) + 'btnno' + (n - y);
+            buttonelement.name='radiogroup' + (j - x); var valueelement=document.getElementById('valueradiogroup' + j
+            + 'btnno' + n); valueelement.id='radiogroup' + (j - x) + 'btnno' + (n - y); } } radiogroups[j] -=y; } } } }
+            radiogroupno -=x; } else { for (let a=1; a <=radiogroups[i]; a++) { var
+            radiobuttonelement=document.getElementById('radiogroup' + i + "btnno" + a); if (!radiobuttonelement &&
+            a==radiogroups[i]) { radiogroups[i]--; } else if (!radiobuttonelement) { var p=a + 1; var y=1; while
+            (!(document.getElementById('radiogroup' + i + 'btnno' + p))) { y++; p++; if ((a + y)> radiogroups[i]) {
+            break;
+            }
+            }
+            for (let n = p; n <= radiogroups[i]; n++) { var buttonelement=document.getElementById('radiogroup' + i + 'btnno'
+                + n); if (buttonelement) { buttonelement.id='radiogroup' + i + 'btnno' + (n - y);
+                buttonelement.name='radiogroup' + i; var valueelement=document.getElementById('valueradiogroup' + i + 'btnno'
+                + n); valueelement.id='radiogroup' + i + 'btnno' + (n - y); } } radiogroups[i] -=y; console.log(radiogroups);
+                } } } }} function rearrangenumberfield() { for (let i=1; i <=numberfieldno; i++) { var
+                numberelement=document.getElementById('numberfield' + i); if (!numberelement && i==numberfieldno) {
+                numberfieldno--; } else if (!numberelement) { var k=i + 1; var x=1; while
+                (!(document.getElementById('divnumberfield' + k))) { x++; k++; if ((i + x)> numberfieldno) {
+                break;
+                }
+                }
+                for (let j = k; j <= numberfieldno; j++) { var divelement=document.getElementById('divnumberfield' + j); if
+                    (divelement) { divelement.id='divnumberfield' + (j - x); var
+                    paragraphelement=document.getElementById('headingnumberfield' + j);
+                    paragraphelement.id='headingnumberfield' + (j - x); var
+                    numberfieldelement=document.getElementById('numberfield' + j); numberfieldelement.id='numberfield' + (j -
+                    x); numberfieldelement.name='numberfield' + (j - x); } } numberfieldno -=x; } } }
