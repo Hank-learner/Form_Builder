@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="index.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        Food Manager -Home
+    </title>
+    <link rel="icon" type="image/png"
+        href="https://spoonthumbs.com/wp-content/uploads/2017/05/cropped-spoonthumbs_favicon_color.png" />
+
+</head>
+
+<body>
+
+    <header>
+        <div class="center">
+            FOOD MANAGER
+        </div>
+    </header>
+
+    <nav>
+        <li><a class="active" href="index.html">Home</a></li>
+        <li><a href="foodcard.html"> Food card</a></li>
+        <li><a href="water.html">Water</a></li>
+        <li id="last"><a href="healthy habits.html">Healthy food habits</a></li>
+    </nav>
+
+
+    <br>
+
+    <div id="inputdata">
+        <form id="inputinitials" onsubmit="return false">
+            <h3 class="cen">Calculate scientific daily energy requirement</h3>
+            <pre>
+    Enter your age  (in years)*:  <input type="number" required min="0" max="100"  placeholder="age"    step="1.00" id="num1"><br>
+    Enter your height (in mts)*:  <input type="number" required min="0" max="300"  placeholder="height"    step="0.01" id="num2"> <br>
+    Enter your weight (in kgs)*:  <input type="number" required min="0" max="500"  placeholder="weight"    step="0.10" id="num3">
+                    </pre>
+
+            <div class="displayflex">
+                <pre>    Your gender:                 </pre>
+                <br> <br>
+                <div>
+                    <input type="radio" id="male" name="gender" value="male" checked>
+                    <label for="male">Male</label>
+                </div>&nbsp &nbsp &nbsp
+
+                <div>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                </div>
+            </div>
+            <div class="cen">
+
+                <input type="submit" value="Submit details" id="userdetails" onsubmit="return false">
+        </form>
+    </div>
+
+
+
+
+    <br>
+
+
+    <h4 class="cen" id="te"></h4>
+
+    </div>
+    <footer>
+        <div id="resss">
+            <button id="reset">Reset</button>
+            <br>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

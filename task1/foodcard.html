@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        Food Card
+    </title>
+    <link rel="icon" type="image/png"
+        href="https://spoonthumbs.com/wp-content/uploads/2017/05/cropped-spoonthumbs_favicon_color.png" />
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="foodcard.css">
+
+</head>
+
+<body>
+
+    <header>
+        <div class="center">
+            FOOD MANAGER
+        </div>
+    </header>
+
+    <nav>
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="foodcard.html"> Food card</a></li>
+        <li><a href="water.html">Water</a></li>
+        <li id="last"><a href="healthy habits.html">Healthy food habits</a></li>
+    </nav>
+
+
+    <br>
+
+    <form id="reqinp">
+        <pre> Set your daily requirement  (in calories):     <input type="number" required min="0" max="10000" placeholder=" Daily Requirement" step="1" id="require">     <input type="submit" value="Set  Requirement" id="getreq"></pre>
+        <div id="requirement"></div>
+
+
+    </form>
+
+    <br>
+    <br>
+    <br>
+
+    <form id="formfd" onsubmit="return false">
+        <table id="t1">
+            <tr>
+                <th>Details</th>
+                <th>FOOD item*</th>
+                <th>Carbhohydrates*</th>
+                <th>Fats*</th>
+                <th>Protiens*</th>
+            </tr>
+            <tr>
+                <td>Enter details about your food taken:</td>
+                <td>Name of food</td>
+                <td>in calories</td>
+                <td>in calories</td>
+                <td>in calories</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <pre>Fill here -> </pre>
+                </td>
+                <td><input type="text" required maxlength="30" id="fooditem"></td>
+                <td><input type="number" required="true" min="0" max="10000" placeholder="Carbhohydrates" step="1"
+                        id="carb"></td>
+                <td><input type="number" required="true" min="0" max="10000" placeholder="Fats" step="1" id="fats"></td>
+                <td><input type="number" required="true" min="0" max="10000" placeholder="Protiens" step="1" id="prot">
+                </td>
+            </tr>
+            <tr>
+                <td>Example:</td>
+                <td>cake 1 pc </td>
+                <td>211</td>
+                <td>473</td>
+                <td>61</td>
+            </tr>
+
+        </table>
+
+        <br>
+        <div class="cen">
+            <h4 id="le"></h4>
+            <input type="submit" id="submitdiff" value="Submit Food item"><br>
+        </div>
+    </form>
+    <br>
+    <br>
+
+    <div id="distab">
+        <table id="disptab">
+            <thead>
+                <tr>
+                    <th>FOOD item<br>name</th>
+                    <th>Carbhohydrates<br>calories</th>
+                    <th>Fats<br>calories</th>
+                    <th>Protiens<br>calories</th>
+                    <th>Total calories</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="disptbody">
+
+            </tbody>
+
+        </table>
+        <br>
+        <button id="retab">Reset table</button>
+    </div>
+
+    <div class="cen">
+        <div id="lef"></div><br>
+        <button id="totalcalories">Get total calories taken today</button><br>
+        <div id="requ">
+            <div id="rea"></div><br>
+            <button id="chkreq" title="enter requirement in the above feild and try">Check Energy
+                Requirement status</button>
+        </div>
+    </div><br>
+    <br>
+    <hr>
+    <footer>
+        <div id="resss">
+            <button id="resst">Reset all details</button>
+            <br>
+        </div>
+    </footer>
+    <script src="foodcard.js"></script>
+</body>
+
+</html>

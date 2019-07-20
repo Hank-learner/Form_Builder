@@ -1,0 +1,163 @@
+#reqinp {
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    background-color: rgb(33, 39, 33);
+    color: #00aeff;
+    border-radius: 15px;
+    justify-content: center;
+    align-content: center;
+    display: grid;
+    height: 75px;
+    width: 700px;
+    text-align: center;
+
+}
+
+input[type=number],
+input[type=text] {
+    width: 140px;
+    border-radius: 5px;
+    padding: 3px 12px;
+    border: 3px solid #2f3966;
+    -moz-outline-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+
+}
+
+button,
+input[type=button],
+input[type=submit] {
+    background-color: #0084ff;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+    font-family: Georgia;
+    cursor: pointer;
+    padding: 3px 12px;
+    border: 3px solid #1833ab;
+
+
+}
+
+.delitem {
+    background-color: tomato;
+    border-radius: 2px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: cell;
+    width: auto;
+    padding: 1px 1px;
+    border: 2px solid #f00000;
+}
+
+button:hover,
+input[type=button]:hover,
+input[type=submit]:hover {
+    background-color: #9da0df80;
+}
+
+#requirement {
+    color: #fff;
+}
+
+#distab {
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6px;
+    border-spacing: 1;
+    border-collapse: collapse;
+
+}
+
+th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 15px;
+    width: 100px;
+    background-color: rgb(63, 63, 63);
+    color: white;
+    text-align: left;
+}
+
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    color: black;
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
+tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+td:last-child {
+    width: 40px;
+}
+
+button#totalcalories {
+    margin: auto;
+    display: block;
+
+}
+
+
+.cen {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
+
+
+table#disptab th {
+    text-align: center;
+
+}
+
+#requ {
+    display: none;
+}
+
+footer {
+    background-color: #252525;
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+#resss {
+    margin: auto;
+    text-align: center;
+
+}
+
+#resst {
+    background-color: tomato;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+    cursor: cell;
+    width: auto;
+    padding: 6px 15px;
+    border: 3px solid #f00000;
+}
+
+#resst:hover {
+    background-color: #dfd39d80;
+}

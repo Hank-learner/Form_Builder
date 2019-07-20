@@ -1,0 +1,109 @@
+body {
+    color: aliceblue;
+    size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+    background: #00293c;
+    font-family: sans-serif;
+
+}
+
+header {
+    background-color: #252525;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+
+.center {
+    text-shadow: 3px 2px rgb(30, 43, 30);
+    color: rgb(27, 189, 37);
+    text-align: center;
+    margin: auto;
+    width: 250px;
+    border: 3px solid rgb(23, 90, 27);
+    padding: 7px;
+}
+
+nav {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #333;
+
+}
+
+li {
+    float: left;
+}
+
+#last {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.active {
+    background-color: rgb(30, 153, 116);
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+
+
+
+
+@media screen and (max-width: 500px) {
+    body {
+        margin: 0;
+        margin-right: 0;
+    }
+
+    nav {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: auto;
+        position: relative;
+
+        background-color: #f1f1f1;
+        height: 100%;
+        overflow: auto;
+        text-align: center;
+    }
+
+    li {
+        width: 100%;
+
+    }
+
+    li a {
+
+        display: block;
+        color: #000;
+        text-decoration: none;
+        text-align: center;
+        float: none;
+        padding: 15px;
+    }
+
+    li a:hover:not(.active) {
+        background-color: rgb(59, 59, 59);
+    }
+
+    .center {
+        width: 92%;
+        border-width: 100%;
+    }
+
+
+}

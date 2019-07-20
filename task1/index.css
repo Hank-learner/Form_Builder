@@ -1,0 +1,128 @@
+header {
+    position: fixed;
+    width: 99%;
+}
+
+nav {
+    position: -webkit-sticky;
+    position: fixed;
+    margin-top: 57.5px;
+    width: 99%;
+}
+
+input[type=number] {
+    width: 140px;
+    border-radius: 5px;
+    padding: 3px 12px;
+    border: 3px solid #2f3966;
+    -moz-outline-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+
+}
+
+button,
+input[type=button],
+input[type=submit] {
+    background-color: #0084ff;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+    font-family: Georgia,
+        'Times New Roman',
+        Times,
+        serif;
+    cursor: pointer;
+    padding: 3px 12px;
+    border: 3px solid #1833ab;
+
+
+}
+
+input[type=button]:hover,
+input[type=submit]:hover {
+    background-color: #9da0df80;
+}
+
+
+#inputdata {
+
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    display: grid;
+    height: 350px;
+    width: 450px;
+    background-color: rgb(33, 39, 33);
+    border-radius: 25px;
+    align-content: center;
+    justify-content: center;
+    margin-top: 150px;
+
+}
+
+.displayflex {
+    display: flex;
+}
+
+
+
+.cen {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
+
+footer {
+    background-color: #252525;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    position: fixed;
+    bottom: 0;
+    width: 99%;
+
+}
+
+#resss {
+    margin: auto;
+    margin-bottom: 0;
+    text-align: center;
+
+}
+
+#reset {
+    background-color: tomato;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 7px;
+    cursor: cell;
+    width: auto;
+    padding: 6px 15px;
+    border: 3px solid #f00000;
+}
+
+#reset:hover {
+    background-color: #dfd39d80;
+}
+
+
+
+@media screen and (max-width: 630px) {
+
+    #inputdata {
+
+        overflow: auto;
+        display: grid;
+        height: 300px;
+        width: 400px;
+        background-color: rgb(33, 39, 33);
+        border-radius: 25px;
+        align-content: center;
+        justify-content: center;
+
+
+    }
+
+}
